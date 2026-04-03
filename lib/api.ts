@@ -17,13 +17,18 @@ axios.defaults.baseURL = 'https://notehub-public.goit.study/api';
 axios.defaults.headers.common['Authorization'] = `Bearer ${myKey}`;
 axios.defaults.headers.common['accept'] = 'application/json';
 
-export async function fetchNotes(page: number, search: string): Promise<ApiResponse> {
+export async function fetchNotes(
+    page: number,
+    search: string,
+    categoryId?: string,
+): Promise<ApiResponse> {
     const options = {
         method: 'GET',
         params: {
             page,
             perPage: 12,
             search,
+            categoryId,
         },
     };
 
