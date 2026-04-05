@@ -12,23 +12,19 @@ interface CreateNote {
     tag: string;
 }
 
-const myKey = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
+const myKey = process.env.NOTEHUB_TOKEN;
 axios.defaults.baseURL = 'https://notehub-public.goit.study/api';
 axios.defaults.headers.common['Authorization'] = `Bearer ${myKey}`;
 axios.defaults.headers.common['accept'] = 'application/json';
 
-export async function fetchNotes(
-    page: number,
-    search: string,
-    categoryId?: string,
-): Promise<ApiResponse> {
+export async function fetchNotes(page: number, search: string, tag?: string): Promise<ApiResponse> {
     const options = {
         method: 'GET',
         params: {
             page,
             perPage: 12,
             search,
-            categoryId,
+            tag,
         },
     };
 
