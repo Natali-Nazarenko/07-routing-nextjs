@@ -5,8 +5,13 @@ import { useQuery } from '@tanstack/react-query';
 
 import css from './NotePreview.module.css';
 import { fetchNoteById } from '@/lib/api';
+import Modal from '@/components/Modal/Modal';
+import { useRouter } from 'next/navigation';
 
 function NotePreviewClient() {
+    const router = useRouter();
+    const close = () => router.back();
+
     const { id } = useParams<{ id: string }>();
 
     const { data, isLoading, error } = useQuery({
@@ -23,16 +28,21 @@ function NotePreviewClient() {
     }
 
     return (
-        <div className={css.container}>
-            <div className={css.item}>
-                <div className={css.header}>
-                    <h2>{data?.title}</h2>
+        <Modal>
+            <div className={css.container}>
+                <div className={css.item}>
+                    <div className={css.header}>
+                        <h2>{data?.title}</h2>
+                    </div>
+                    <p className={css.tag}>{data?.tag}</p>
+                    <p className={css.content}>{data?.content}</p>
+                    <p className={css.date}>{data?.createdAt}</p>
                 </div>
-                <p className={css.tag}>{data?.tag}</p>
-                <p className={css.content}>{data?.content}</p>
-                <p className={css.date}>{data?.createdAt}</p>
+                <button className={css.backBtn} onClick={close}>
+                    Close
+                </button>
             </div>
-        </div>
+        </Modal>
     );
 }
 

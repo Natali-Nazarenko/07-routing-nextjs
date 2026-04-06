@@ -3,12 +3,12 @@ import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query
 import NotesClient from './Notes.client';
 
 type NotesByTagProps = {
-    params: { slug: string[] };
+    params: Promise<{ slug: string[] }>;
 };
 
 async function NotesByTag({ params }: NotesByTagProps) {
-    // const { slug } = params;
-    const firstSlug = params.slug?.[0];
+    const { slug } = await params;
+    const firstSlug = slug?.[0];
 
     const tag = firstSlug && firstSlug !== 'all' ? firstSlug : undefined;
     const page = 1;
