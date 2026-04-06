@@ -6,10 +6,11 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 interface ModalProps {
+    onClose?: () => void;
     children: React.ReactNode;
 }
 
-function Modal({ children }: ModalProps) {
+function Modal({ onClose, children }: ModalProps) {
     const router = useRouter();
 
     const handleBackdropClick = (event: React.MouseEvent<HTMLDivElement>) => {
