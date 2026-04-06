@@ -28,7 +28,7 @@ function NotePreviewClient() {
     }
 
     return (
-        <Modal>
+        <Modal onClose={close}>
             <div className={css.container}>
                 <div className={css.item}>
                     <div className={css.header}>
